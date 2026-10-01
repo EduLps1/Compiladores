@@ -1,0 +1,4 @@
+erro sintatico [2:17] S001: encontrado ;
+erro sintatico [4:5] S002: encontrado turn_left; esperado ;
+erro sintatico [6:1] S003: encontrado }; esperado ;
+analise sintatica: 3 erro(s)

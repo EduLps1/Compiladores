@@ -1,0 +1,33 @@
+=== fonte BD-1 embutida ===
+mission main() {
+    int steps = 2;
+
+    repeat steps {
+        move(1);
+    }
+
+    stop();
+}
+=== integracao lexer-parser ===
+[trace] origem: exemplo interno do executavel
+[trace] lexer: iniciado
+[trace] lexer: 24 token(s), 0 erro(s)
+[trace] adapter: 24 token(s) preparados para o Bison
+[trace] parser: LALR(1) iniciado
+[trace] parser: entrada aceita
+[trace] ast: raiz Mission criada
+=== AST produzida ===
+Mission main [1:1]
+`-- Block [1:16]
+    |-- VariableDeclaration int steps [2:5]
+    |   `-- Integer 2 [2:17]
+    |-- Repeat [4:5]
+    |   |-- Count [4:12]
+    |   |   `-- Identifier steps [4:12]
+    |   `-- Body [4:18]
+    |       `-- Block [4:18]
+    |           `-- Move [5:9]
+    |               `-- Integer 1 [5:14]
+    `-- Stop [8:5]
+=== validacao automatica ===
+esperado == obtido: PASS

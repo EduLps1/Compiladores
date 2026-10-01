@@ -3,6 +3,7 @@ FROM debian:bookworm-slim AS toolchain
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
         ca-certificates \
+        bison \
         cmake \
         flex \
         g++ \

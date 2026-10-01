@@ -1,0 +1,17 @@
+mission main() {
+    int steps = 0;
+    bool arrived = false;
+
+    while (!arrived) {
+        if (front_clear()) {
+            move(1);
+            steps++;
+        } else {
+            turn_right();
+        }
+
+        arrived = at_goal();
+    }
+
+    stop();
+}

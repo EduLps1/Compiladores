@@ -1,0 +1,6 @@
+mission main() {
+    int steps = ;
+    move(1)
+    turn_left();
+    stop()
+}
