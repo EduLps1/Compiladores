@@ -66,5 +66,5 @@ int = steps 10;
 ```
 
 Por isso, o lexer consegue percorrê-la sem erro. A ordem, porém, não representa
-uma declaração válida. A rejeição dessa sequência será responsabilidade da
-análise sintática na `v0.2.0`.
+uma declaração válida. O parser implementado desde a `v0.2.0` rejeita essa
+sequência durante a análise sintática.

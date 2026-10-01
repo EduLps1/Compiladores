@@ -3,7 +3,20 @@
 Todas as mudanças relevantes do R2-D2 Compiler serão registradas neste arquivo.
 O projeto segue o versionamento semântico.
 
-## [0.2.0] — candidata, ainda não publicada
+## [0.2.1] — 2026-10-01
+
+### Alterado
+
+- README consolidado com a arquitetura completa do front-end;
+- especificação sintática e EBNF apresentadas diretamente na página inicial;
+- integração entre Flex, adaptador de tokens, Bison e AST documentada em
+  detalhes;
+- seções de precedência, recuperação de erros, comandos do CLI, testes e
+  limites entre sintaxe e semântica adicionadas ao README;
+- documentação e exemplos sincronizados com a versão atual;
+- versão do executável atualizada para `0.2.1`.
+
+## [0.2.0] — 2026-10-01
 
 ### Adicionado
 

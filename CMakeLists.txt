@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.20)
 
 project(
     R2D2Compiler
-    VERSION 0.2.0
+    VERSION 0.2.1
     DESCRIPTION "Front-end da linguagem BD-1"
     LANGUAGES CXX
 )
@@ -88,7 +88,7 @@ if(BUILD_TESTING)
     add_test(NAME cli_version COMMAND r2d2c --version)
     set_tests_properties(
         cli_version
-        PROPERTIES PASS_REGULAR_EXPRESSION "r2d2c 0.2.0"
+        PROPERTIES PASS_REGULAR_EXPRESSION "r2d2c 0.2.1"
     )
 
     foreach(golden_case IN ITEMS valid_ast invalid_syntax demo)

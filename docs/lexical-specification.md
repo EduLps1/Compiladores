@@ -26,7 +26,8 @@ reservada, enquanto `Move` é um identificador.
 | Sensores | `front_clear`, `at_goal` |
 
 O reconhecimento léxico dessas palavras não significa que sua combinação já
-seja aceita. A gramática da `v0.2.0` definirá onde cada token pode aparecer.
+seja aceita. A gramática sintática disponível desde a `v0.2.0` define onde
+cada token pode aparecer.
 
 ## 3. Identificadores e literais
 
@@ -48,9 +49,9 @@ Exemplos inválidos como identificador: `1robot`, `posição` e `robot-name`.
 
 Inteiros são decimais sem sinal e precisam caber em 64 bits com sinal. O sinal
 de `-10` é reconhecido separadamente como `MINUS` seguido de `INTEGER(10)`,
-permitindo que o futuro parser diferencie negação de subtração.
+permitindo que o parser diferencie negação de subtração.
 
-Literais `string` não fazem parte da `v0.1.0`.
+Literais `string` não fazem parte da versão atual da BD-1.
 
 ## 4. Operadores
 
@@ -106,12 +107,13 @@ diagnóstico `L003` na posição em que `/*` começou.
 O analisador reúne todos os erros recuperáveis. Se houver pelo menos um
 diagnóstico, a CLI termina com código diferente de zero.
 
-## 8. Limite desta versão
+## 8. Limite da etapa léxica
 
 A `v0.1.0` responde apenas:
 
 > Quais tokens existem no arquivo e onde eles aparecem?
 
-Ela ainda não responde se os tokens formam um programa válido, se uma variável
-foi declarada ou se os tipos são compatíveis. Essas responsabilidades pertencem
-às análises sintática e semântica.
+Ela não responde se os tokens formam um programa válido, se uma variável foi
+declarada ou se os tipos são compatíveis. Na versão atual, a análise sintática
+já verifica a primeira questão; declaração, escopo e tipos permanecem para a
+análise semântica.

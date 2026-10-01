@@ -1,6 +1,6 @@
 # Especificação sintática da BD-1
 
-## Objetivo da versão 0.2.0
+## Objetivo da versão 0.2.1
 
 A análise sintática verifica se a sequência de tokens produzida pelo lexer
 obedece à estrutura da linguagem. Ela não decide ainda se uma variável foi
