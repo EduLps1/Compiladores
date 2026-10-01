@@ -1,0 +1,76 @@
+cmake_minimum_required(VERSION 3.20)
+
+project(
+    R2D2Compiler
+    VERSION 0.1.0
+    DESCRIPTION "Front-end da linguagem BD-1"
+    LANGUAGES CXX
+)
+
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
+
+find_package(FLEX 2.6 REQUIRED)
+
+file(MAKE_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/generated")
+flex_target(
+    BD1Scanner
+    "${CMAKE_CURRENT_SOURCE_DIR}/src/lexer.l"
+    "${CMAKE_CURRENT_BINARY_DIR}/generated/lexer.cpp"
+)
+
+add_library(
+    r2d2_lexer
+    src/diagnostic.cpp
+    src/lexer.cpp
+    src/scanner.cpp
+    src/token.cpp
+    ${FLEX_BD1Scanner_OUTPUTS}
+)
+
+target_include_directories(
+    r2d2_lexer
+    PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/include"
+    PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/src"
+)
+
+target_compile_options(
+    r2d2_lexer
+    PRIVATE
+        $<$<CXX_COMPILER_ID:GNU,Clang>:-Wall;-Wextra;-Wpedantic>
+)
+
+add_executable(r2d2c src/main.cpp)
+target_link_libraries(r2d2c PRIVATE r2d2_lexer)
+target_compile_definitions(r2d2c PRIVATE R2D2_VERSION="${PROJECT_VERSION}")
+
+include(CTest)
+if(BUILD_TESTING)
+    add_executable(lexer_tests tests/lexer_tests.cpp)
+    target_link_libraries(lexer_tests PRIVATE r2d2_lexer)
+
+    add_test(NAME lexer_unit COMMAND lexer_tests)
+    add_test(
+        NAME cli_valid_example
+        COMMAND r2d2c tokens "${CMAKE_CURRENT_SOURCE_DIR}/examples/navigation.bd1"
+    )
+    set_tests_properties(
+        cli_valid_example
+        PROPERTIES PASS_REGULAR_EXPRESSION "analise lexica: sucesso"
+    )
+
+    add_test(
+        NAME cli_invalid_example
+        COMMAND r2d2c tokens "${CMAKE_CURRENT_SOURCE_DIR}/examples/lexical-errors.bd1"
+    )
+    set_tests_properties(cli_invalid_example PROPERTIES WILL_FAIL TRUE)
+
+    add_test(NAME cli_version COMMAND r2d2c --version)
+    set_tests_properties(
+        cli_version
+        PROPERTIES PASS_REGULAR_EXPRESSION "r2d2c 0.1.0"
+    )
+endif()
+
+install(TARGETS r2d2c RUNTIME DESTINATION bin)

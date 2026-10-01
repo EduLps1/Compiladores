@@ -1,0 +1,7 @@
+mission main() {
+    int valid_value = 10;
+
+    // BD-1 nao possui os caracteres @ e # em seu vocabulario.
+    valid_value = valid_value @ 2;
+    valid_value = valid_value # 3;
+}

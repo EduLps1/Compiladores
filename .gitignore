@@ -1,0 +1,6 @@
+/build/
+/cmake-build-*/
+/.cache/
+.DS_Store
+*.o
+*.out
